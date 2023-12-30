@@ -251,6 +251,8 @@ u8 IICreadBytes(u8 dev, u8 reg, u8 length, u8 *data){
 	IIC_Wait_Ack();
 	IIC_Send_Byte(reg);   //发送地址
     IIC_Wait_Ack();	  
+    IIC_SCL=0; 
+    Delay_us(2); 
 	IIC_Start();
 	IIC_Send_Byte(dev+1);  //进入接收模式	
 	IIC_Wait_Ack();
