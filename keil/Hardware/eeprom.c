@@ -1,84 +1,75 @@
 #include "stm32f10x.h"                  // Device header
-#include "Delay.h"
-/**
-  * @brief  Èí¼şÄ£ÄâEEPROM×Ö½ÚĞ´Èë
-  * @param  addr:ÒªĞ´ÈëÊı¾İµÄµØÖ·
-			data:ÒªĞ´ÈëµÄÊı¾İ
-  * @retval	ÎŞ
-  */
-  
-u16 i,j;
+#include "delay.h"
+#include "eeprom.h"
+//#include "OLED.h"
+//#include "led.h"
+//#include "key.h"
+//#include "Timer.h"
 
-void EEPROM_ByteWrite(uint8_t addr, uint8_t data)
+uint16_t Num;
+uint8_t data = 45;
+uint8_t data_rec = 0;
+uint8_t addr = 11;
+ /**
+  * @brief  ç­‰å¾…EEPROMå†™å…¥å®Œæˆ
+  * @param  æ— 
+  * @retval	æ— 
+  */
+
+
+int main(void)
 {
-	/* ²úÉúÆğÊ¼ĞÅºÅ */
-	I2C_GenerateSTART(I2C1, ENABLE);
-	/* ¼ì²âEV5ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT) != SUCCESS );
-	
-	/* ·¢ËÍ7Î»´Ó»úµØÖ· */
-	I2C_Send7bitAddress(I2C1, 0xA0, I2C_Direction_Transmitter);
+    GPIO_InitTypeDef GPIO_InitStruct;
+    GPIO_InitTypeDef GPIO_InitStructure; //é…ç½®GPIOå£ç»“æ„ä½“  -PB6 -PB7
+    I2C_InitTypeDef I2C_InitStructure;   //é…ç½®ç¡¬ä»¶I2Cç»“æ„ä½“
+    GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
+    GPIO_InitStruct.GPIO_Pin=GPIO_Pin_0;
+    GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);
+    GPIO_Init(GPIOC,&GPIO_InitStruct);
+    GPIO_SetBits(GPIOC,GPIO_Pin_0);
+
     
-    Delay_ms(1000);
 
-	/* ¼ì²âEV6ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED) != SUCCESS );
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); //ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);  //ä½¿èƒ½I2C1æ—¶é’Ÿ
+    
+    //PB6â€”â€”SCL PB7â€”â€”SDA
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD; //å¤ç”¨å¼€æ¼
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    
+    GPIO_Init(GPIOB, &GPIO_InitStructure); //åˆå§‹åŒ–GPIOBç»“æ„ä½“
+    
+    
+    I2C_DeInit(I2C1);
+    I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;        //I2Cåº”ç­”ä¿¡å·ä½¿èƒ½
+    I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit; //è®¾ç½®ä»æœºåœ°å€é•¿åº¦ä¸º7ä½
+    I2C_InitStructure.I2C_ClockSpeed = 10000;         //è®¾ç½®ç›®æ ‡å‘¨æœŸ 400khz
+    I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2; //è®¾ç½®å ç©ºæ¯”ä¸º2ï¼š1
+    I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;         //è®¾ç½®ä¸ºI2Cæ¨¡å¼
+    I2C_InitStructure.I2C_OwnAddress1 = 0x30;          //è®¾ç½®ä¸»æœºåœ°å€
+    
+    I2C_Init(I2C1, &I2C_InitStructure); //åˆå§‹åŒ–I2C1ç»“æ„ä½“
+    I2C_Cmd(I2C1, ENABLE); //ä½¿èƒ½I2C1
+
+	EEPROM_ByteWrite(addr, data);
+	EEPROM_RandomRead(addr, &data_rec);
+
+    //EEPROM_ByteWrite(addr, data);
+	//EEPROM_RandomRead(addr, &data_rec);
 	
-	/* ·¢ËÍÒªĞ´ÈëÊı¾İµÄµØÖ· */
-	I2C_SendData(I2C1, addr);
-	/* ¼ì²âEV8ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTING) != SUCCESS );
-	
-	/* ·¢ËÍÒªĞ´ÈëµÄÊı¾İ */
-	I2C_SendData(I2C1, data);
-	/* ¼ì²âEV8_2ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED) != SUCCESS );
-	
-	/* ²úÉúÍ£Ö¹ĞÅºÅ */
-	I2C_GenerateSTOP(I2C1, ENABLE);	
-	/* ÖØĞÂÊ¹ÄÜACK */
-	I2C_AcknowledgeConfig(I2C1, ENABLE);
+    while(1)
+    {
+      //LED_ON();
+         
+      //  N=TIM_GetCounter(TIM2);
+        
+    }
+    
 }
 
 
-/**
-  * @brief  Èí¼şÄ£ÄâEEPROMËæ»ú¶ÁÈ¡
-  * @param  addr:Òª¶ÁÈ¡Êı¾İµÄµØÖ·
-			*data:Òª½ÓÊÕÊı¾İµÄÈİÆ÷
-  * @retval	ÎŞ
-  */
-void EEPROM_RandomRead(uint8_t addr, uint8_t* data)
-{
-	/* ²úÉúµÚÒ»´ÎÆğÊ¼ĞÅºÅ */
-	I2C_GenerateSTART(I2C1, ENABLE);
-	/* ¼ì²âEV5ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT) != SUCCESS );
-	/* ·¢ËÍ7Î»´Ó»úµØÖ· */
-	I2C_Send7bitAddress(I2C1, 0xA0, I2C_Direction_Transmitter);
-	/* ¼ì²âEV6ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED ) != SUCCESS );
-	/* ·¢ËÍÒª¶ÁÈ¡Êı¾İµÄµØÖ· */
-	I2C_SendData(I2C1, addr);
-	/* ¼ì²âEV8ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTING) != SUCCESS );
-	
-	/* ²úÉúµÚ¶ş´ÎÆğÊ¼ĞÅºÅ */
-	I2C_GenerateSTART(I2C1, ENABLE);
-	/* ¼ì²âEV5ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT) != SUCCESS );
-	/* ·¢ËÍ7Î»´Ó»úµØÖ· */
-	I2C_Send7bitAddress(I2C1, 0xA1, I2C_Direction_Receiver);
-	/* ¼ì²âEV6ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED) != SUCCESS );
-	
-	/* ¼ì²âEV7ÊÂ¼ş */
-	while( I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED) != SUCCESS );
-	/* ¶ÁÈ¡Êı¾İ¼Ä´æÆ÷ÖĞµÄÊı¾İ */
-	*data = I2C_ReceiveData(I2C1);
-	
-	/* ²úÉúÍ£Ö¹ĞÅºÅ */
-	I2C_GenerateSTOP(I2C1, ENABLE);
-	/* ÖØĞÂÊ¹ÄÜACK */
-	I2C_AcknowledgeConfig(I2C1, ENABLE);	
-}
+
 
