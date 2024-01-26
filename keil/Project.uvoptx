@@ -244,7 +244,7 @@
           <Type>0</Type>
           <LineNumber>24</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134230412</Address>
+          <Address>134230916</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -311,32 +311,17 @@
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>yaw</ItemText>
+          <ItemText>(short)(Roll*100),0x0A</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>(short)(Roll*100),0x0A</ItemText>
+          <ItemText>(short)(Pitch*100),0x0A</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>(short)(Pitch*100),0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>1</WinNumber>
           <ItemText>(short)(Yaw*10),0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>yaw</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>addr,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -344,6 +329,21 @@
           <count>0</count>
           <WinNumber>2</WinNumber>
           <ItemText>ack,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>rxd_flag</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>rxd_buf[0]</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>rxd_buf</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>

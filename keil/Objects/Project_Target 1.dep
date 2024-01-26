@@ -1031,7 +1031,7 @@ I (.\Hardware\DMP\inv_mpu_dmp_motion_driver.h)(0x658F8AF9)
 I (.\Hardware\DMP\dmpKey.h)(0x658F8AF9)
 I (.\Hardware\DMP\dmpmap.h)(0x658F8AF9)
 F (.\Hardware\MPU6050\mpu6050.h)(0x65B0C0CF)()
-F (.\Hardware\SERIAL\serial.c)(0x65B1D6ED)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\Hardware\DMP -I .\Hardware\EXTI -I .\Hardware\IIC -I .\Hardware\MPU6050 -I .\Hardware\SERIAL-IC:\Users\zitons\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\serial.o --omf_browse .\objects\serial.crf --depend .\objects\serial.d)
+F (.\Hardware\SERIAL\serial.c)(0x65B34B6F)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\Hardware\DMP -I .\Hardware\EXTI -I .\Hardware\IIC -I .\Hardware\MPU6050 -I .\Hardware\SERIAL-IC:\Users\zitons\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\serial.o --omf_browse .\objects\serial.crf --depend .\objects\serial.d)
 I (.\Start\stm32f10x.h)(0x658F8AFA)
 I (.\Start\core_cm3.h)(0x658F8AFA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
@@ -1060,8 +1060,9 @@ I (.\Library\stm32f10x_tim.h)(0x658F8AFA)
 I (.\Library\stm32f10x_usart.h)(0x658F8AFA)
 I (.\Library\stm32f10x_wwdg.h)(0x658F8AFA)
 I (.\Library\misc.h)(0x658F8AF9)
-F (.\Hardware\SERIAL\serial.h)(0x659D58D4)()
-F (.\User\main.c)(0x65B1DAAD)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\Hardware\DMP -I .\Hardware\EXTI -I .\Hardware\IIC -I .\Hardware\MPU6050 -I .\Hardware\SERIAL-IC:\Users\zitons\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5F63878A)
+F (.\Hardware\SERIAL\serial.h)(0x65B32DEC)()
+F (.\User\main.c)(0x65B34AF1)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\Hardware\DMP -I .\Hardware\EXTI -I .\Hardware\IIC -I .\Hardware\MPU6050 -I .\Hardware\SERIAL-IC:\Users\zitons\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\Start\stm32f10x.h)(0x658F8AFA)
 I (.\Start\core_cm3.h)(0x658F8AFA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5F63877C)
@@ -1101,7 +1102,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5F63877C)
 I (.\Hardware\DMP\inv_mpu_dmp_motion_driver.h)(0x658F8AF9)
 I (.\Hardware\DMP\dmpKey.h)(0x658F8AF9)
 I (.\Hardware\DMP\dmpmap.h)(0x658F8AF9)
-I (.\Hardware\SERIAL\serial.h)(0x659D58D4)
+I (.\Hardware\SERIAL\serial.h)(0x65B32DEC)
 I (.\Hardware\EXTI\myexti.h)(0x65ACE090)
 F (.\User\stm32f10x_conf.h)(0x658F8AFA)()
 F (.\User\stm32f10x_it.c)(0x658F8AFA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\Hardware\DMP -I .\Hardware\EXTI -I .\Hardware\IIC -I .\Hardware\MPU6050 -I .\Hardware\SERIAL-IC:\Users\zitons\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="532" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)

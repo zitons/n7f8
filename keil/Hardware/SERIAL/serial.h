@@ -1,7 +1,7 @@
 #ifndef __SERIAL_H
 #define __SERIAL_H
 
-
+extern uint8_t rxd_buf[4];
 void Serial_Init(void);
 void usart1_send_char(u8 c);
 void usart1_niming_report(u8 fun,u8*data,u8 len);

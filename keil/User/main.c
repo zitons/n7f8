@@ -30,7 +30,7 @@ int main(void)
 	DMP_Init();
 	MBOT_EXTI_Init();
 
-
+    //usart1_report_imu_V7_1(12349,2486,3536,0x00);
     while(1)
     {
         getAngle(&yaw,&yaw_acc_error);  
@@ -38,13 +38,14 @@ int main(void)
         MPU_Get_Accelerometer(&ax,&ay,&az);
         //mpu6050_send_data(ax,ay,az,gx,gy,gz);
 
-        if(Roll!=0&&roll!=(short)(Roll*100))
-        {
-        roll=(short)(Roll*100);
+//        if(Roll!=0&&roll!=(short)(Roll*100))
+//        {
+//        roll=(short)(Roll*100);
         //usart1_report_imu(ax,ay,az,gx,gy,gz,(short)(Roll*100),(short)(Pitch*100),(short)(Yaw*10));
+        
         usart1_report_imu_V7_1((short)(Roll*100),(short)(Pitch*100),(short)(Yaw*100),0x03);
         //Delay_ms(38000);
-        }
+        //}
         
     }
     
